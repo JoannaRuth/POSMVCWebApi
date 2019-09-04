@@ -1,0 +1,55 @@
+﻿@model IEnumerable<POSMVCWebAPIClient.Models.Item>
+
+
+@{
+    ViewBag.Title = "FinishBilling";
+}
+
+<h2>Bill</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ItemId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriceMultiplied)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.ItemId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PriceMultiplied)
+    </td>
+
+</tr>
+    }
+    
+</table>
+<h6>Bill Amount - @ViewBag.data</h6>
+<p>
+
+    @Html.ActionLink("New Transaction", "Index", new { id = "from new transaction" })
+</p>

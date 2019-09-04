@@ -1,12 +1,15 @@
 ﻿using POSMVCWebAPIClient.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Xml.Serialization;
 
 namespace POSMVCWebAPIClient.Controllers
 {
@@ -18,10 +21,22 @@ namespace POSMVCWebAPIClient.Controllers
         public static decimal totalAmount = 0;
 
         // GET: Item
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-             ViewBag.message = itemAvailability;
-            ViewBag.totalAmount = totalAmount;
+            if (string.Equals(id, "from new transaction"))
+            {
+                ItemList.Clear();
+                ViewBag.message = itemAvailability;
+                ViewBag.totalAmount = 0;
+                totalAmount = 0;
+                return View(ViewBag);
+            }
+            else
+            {
+
+                ViewBag.message = itemAvailability;
+                ViewBag.totalAmount = totalAmount;
+            }
           
             return View();
         }
@@ -104,7 +119,9 @@ namespace POSMVCWebAPIClient.Controllers
 
              else
             {
-                string apiURI = "http://153.59.21.26/POSMVCWebAPI/api/Items/";
+                // string apiURI = "http://153.59.21.26/POSMVCWebAPI/api/Items/";
+
+                string apiURI = ConfigurationManager.AppSettings["apiGetUri"];
 
                 apiURI = apiURI + ItemId;
                 var client = new HttpClient();
@@ -147,6 +164,22 @@ namespace POSMVCWebAPIClient.Controllers
                 }
             }
 
+        }
+
+        public ActionResult FinishBilling()
+        {
+
+            XmlSerializer xs = new XmlSerializer(typeof(List<Item>));
+
+            TextWriter txtWriter = new StreamWriter(@"C:\Users\PK185206\Desktop\sample1.xml");
+
+            xs.Serialize(txtWriter, ItemList);
+
+            txtWriter.Close();
+
+
+            ViewBag.data = totalAmount;
+            return View(ItemList);
         }
 
     }

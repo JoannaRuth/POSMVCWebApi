@@ -169,6 +169,7 @@
     <Content Include="Views\Item\ScanItem.cshtml" />
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Item\DisplayItemList.cshtml" />
+    <Content Include="Views\Item\FinishBilling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
