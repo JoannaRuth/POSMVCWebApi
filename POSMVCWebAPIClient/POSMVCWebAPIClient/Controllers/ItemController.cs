@@ -15,11 +15,14 @@ namespace POSMVCWebAPIClient.Controllers
         public static List<Item> ItemList = new List<Item>();
         public static int i = 0;
         public static string itemAvailability = "";
+        public static decimal totalAmount = 0;
 
         // GET: Item
         public ActionResult Index()
         {
-            ViewBag.message = itemAvailability;
+             ViewBag.message = itemAvailability;
+            ViewBag.totalAmount = totalAmount;
+          
             return View();
         }
 
@@ -60,11 +63,16 @@ namespace POSMVCWebAPIClient.Controllers
                 {
                     itemFoundInList.Quantity--;
                     itemFoundInList.PriceMultiplied = (itemFoundInList.Price) * itemFoundInList.Quantity;
-                    
+
+                    //
+                    totalAmount = totalAmount - itemFoundInList.Price;
+                //
+
                 }
 
                 else
                 {
+                    totalAmount = totalAmount - itemFoundInList.Price;
                     ItemList.Remove(itemFoundInList);
                 }
             }
@@ -87,6 +95,10 @@ namespace POSMVCWebAPIClient.Controllers
                 Item itemFoundInList = ItemList.Find(itemsFoundInList => itemsFoundInList.ItemId.Equals(ItemId));
                 itemFoundInList.Quantity++;
                 itemFoundInList.PriceMultiplied = (itemFoundInList.Price) * itemFoundInList.Quantity;
+
+                //
+                totalAmount = totalAmount + itemFoundInList.Price;
+                //
                 return RedirectToAction("Index");
             }
 
@@ -119,6 +131,9 @@ namespace POSMVCWebAPIClient.Controllers
                     i++;
                     itemAvailability = "";
 
+                    //
+                    totalAmount=totalAmount+ item.Price;
+                    //
 
                     return RedirectToAction("Index");
 
