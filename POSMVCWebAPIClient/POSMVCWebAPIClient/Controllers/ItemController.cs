@@ -96,7 +96,7 @@ namespace POSMVCWebAPIClient.Controllers
                 itemFoundInList.Quantity++;
                 itemFoundInList.PriceMultiplied = (itemFoundInList.Price) * itemFoundInList.Quantity;
 
-                //
+                //hello
                 totalAmount = totalAmount + itemFoundInList.Price;
                 //
                 return RedirectToAction("Index");
@@ -104,7 +104,7 @@ namespace POSMVCWebAPIClient.Controllers
 
              else
             {
-                string apiURI = "http://localhost:53297/api/Items/";
+                string apiURI = "http://153.59.21.26/POSMVCWebAPI/api/Items/";
 
                 apiURI = apiURI + ItemId;
                 var client = new HttpClient();
