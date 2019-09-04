@@ -36,62 +36,100 @@ namespace POSMVCWebAPIClient.Controllers
             return PartialView(ItemList);
         }
 
-        public ActionResult Delete(int id)
-        {
-            Item item = new Item();
-            var query = ItemList.Where(i => i.Index == id);
-            foreach (var i in query)
-            {
-                item = i;
-            }
+        //public ActionResult Delete(int id)
+        //{
+        //    Item item = new Item();
+        //    var query = ItemList.Where(i => i.Index == id);
+        //    foreach (var i in query)
+        //    {
+        //        item = i;
+        //    }
 
-            ItemList.Remove(item);
+        //    ItemList.Remove(item);
+
+        //    return RedirectToAction("Index");
+        //}
+
+            public ActionResult Delete(string id)
+        {
+            bool alreadyExists = ItemList.Any(x => x.ItemId == id);
+            if(alreadyExists)
+            {
+                Item itemFoundInList = ItemList.Find(itemsFoundInList => itemsFoundInList.ItemId.Equals(id));
+                if(itemFoundInList.Quantity>1)
+                {
+                    itemFoundInList.Quantity--;
+                    itemFoundInList.PriceMultiplied = (itemFoundInList.Price) * itemFoundInList.Quantity;
+                    
+                }
+
+                else
+                {
+                    ItemList.Remove(itemFoundInList);
+                }
+            }
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult CheckItemAvailability(int ItemId) //parameter should be same as field name , not case sensitive
+
+        public ActionResult CheckItemAvailability(string ItemId) //parameter should be same as field name , not case sensitive
         {
-
-            string apiURI = "http://localhost:53297/api/Items/";
-            apiURI = apiURI + ItemId.ToString();
-            var client = new HttpClient();
-
-            var response = client.GetAsync(apiURI);
+            Item item;
+            
 
             string op = "";
-            Item item;
 
-            if (response.Result.IsSuccessStatusCode)
+            bool alreadyExists = ItemList.Any(x => x.ItemId == ItemId);
+
+            if(alreadyExists)
             {
-                using (HttpContent cont = response.Result.Content)
+                Item itemFoundInList = ItemList.Find(itemsFoundInList => itemsFoundInList.ItemId.Equals(ItemId));
+                itemFoundInList.Quantity++;
+                itemFoundInList.PriceMultiplied = (itemFoundInList.Price) * itemFoundInList.Quantity;
+                return RedirectToAction("Index");
+            }
+
+             else
+            {
+                string apiURI = "http://localhost:53297/api/Items/";
+
+                apiURI = apiURI + ItemId;
+                var client = new HttpClient();
+
+                var response = client.GetAsync(apiURI);
+                if (response.Result.IsSuccessStatusCode)
                 {
-                    Task<string> res = cont.ReadAsStringAsync();
-                    op = res.Result;
+                    using (HttpContent cont = response.Result.Content)
+                    {
+                        Task<string> res = cont.ReadAsStringAsync();
+                        op = res.Result;
 
-                    //User user=JsonConvert.DeserializeObject<User>
-                    JavaScriptSerializer js = new JavaScriptSerializer();
+                        //User user=JsonConvert.DeserializeObject<User>
+                        JavaScriptSerializer js = new JavaScriptSerializer();
 
-                    item = js.Deserialize<Item>(op);
+                        item = js.Deserialize<Item>(op);
+
+                    }
+
+                    item.Index = i;
+                    item.PriceMultiplied = item.Price;
+
+                    ItemList.Add(item);
+                    i++;
+                    itemAvailability = "";
+
+
+                    return RedirectToAction("Index");
 
                 }
 
-                item.Index = i;
+                else
+                {
+                    itemAvailability = "Item not available";
+                    return RedirectToAction("Index");
 
-                ItemList.Add(item);
-                i++;
-                itemAvailability = "";
-
-
-                return RedirectToAction("Index");
-
-            }
-
-            else
-            {
-                itemAvailability = "Item not available";
-                return RedirectToAction("Index");
-
+                }
             }
 
         }

@@ -11,7 +11,14 @@ namespace POSMVCWebAPIClient.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Index { get; set; }
+        public int Quantity { get; set; }
+        public decimal PriceMultiplied { get; set; }
 
+        public Item()
+        {
+            Quantity = 1;
+           // PriceMultiplied = Price;
+        }
 
     }
 }
