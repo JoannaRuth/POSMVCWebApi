@@ -23,23 +23,16 @@ namespace POSMVCWebAPIClient.Controllers
         // GET: Item
         public ActionResult Index(string id)
         {
-            if (string.Equals(id, "from new transaction"))
-            {
-                ItemList.Clear();
-                ViewBag.message = itemAvailability;
-                ViewBag.totalAmount = 0;
-                totalAmount = 0;
-                return View(ViewBag);
-            }
-            else
-            {
 
-                ViewBag.message = itemAvailability;
-                ViewBag.totalAmount = totalAmount;
-            }
-          
+
+            ViewBag.message = itemAvailability;
+            ViewBag.totalAmount = totalAmount;
+
+
             return View();
         }
+
+       
 
         public ActionResult ScanItem()
         {
@@ -54,34 +47,22 @@ namespace POSMVCWebAPIClient.Controllers
             return PartialView(ItemList);
         }
 
-        //public ActionResult Delete(int id)
-        //{
-        //    Item item = new Item();
-        //    var query = ItemList.Where(i => i.Index == id);
-        //    foreach (var i in query)
-        //    {
-        //        item = i;
-        //    }
 
-        //    ItemList.Remove(item);
 
-        //    return RedirectToAction("Index");
-        //}
-
-            public ActionResult Delete(string id)
+        public ActionResult Delete(string id)
         {
             bool alreadyExists = ItemList.Any(x => x.ItemId == id);
-            if(alreadyExists)
+            if (alreadyExists)
             {
                 Item itemFoundInList = ItemList.Find(itemsFoundInList => itemsFoundInList.ItemId.Equals(id));
-                if(itemFoundInList.Quantity>1)
+                if (itemFoundInList.Quantity > 1)
                 {
                     itemFoundInList.Quantity--;
                     itemFoundInList.PriceMultiplied = (itemFoundInList.Price) * itemFoundInList.Quantity;
 
                     //
                     totalAmount = totalAmount - itemFoundInList.Price;
-                //
+                    //
 
                 }
 
@@ -99,13 +80,13 @@ namespace POSMVCWebAPIClient.Controllers
         public ActionResult CheckItemAvailability(string ItemId) //parameter should be same as field name , not case sensitive
         {
             Item item;
-            
+
 
             string op = "";
 
             bool alreadyExists = ItemList.Any(x => x.ItemId == ItemId);
 
-            if(alreadyExists)
+            if (alreadyExists)
             {
                 Item itemFoundInList = ItemList.Find(itemsFoundInList => itemsFoundInList.ItemId.Equals(ItemId));
                 itemFoundInList.Quantity++;
@@ -117,9 +98,9 @@ namespace POSMVCWebAPIClient.Controllers
                 return RedirectToAction("Index");
             }
 
-             else
+            else
             {
-                // string apiURI = "http://153.59.21.26/POSMVCWebAPI/api/Items/";
+                // string apiURI = "http://localhost:53297/api/Items/";
 
                 string apiURI = ConfigurationManager.AppSettings["apiGetUri"];
 
@@ -149,7 +130,7 @@ namespace POSMVCWebAPIClient.Controllers
                     itemAvailability = "";
 
                     //
-                    totalAmount=totalAmount+ item.Price;
+                    totalAmount = totalAmount + item.Price;
                     //
 
                     return RedirectToAction("Index");
@@ -169,17 +150,50 @@ namespace POSMVCWebAPIClient.Controllers
         public ActionResult FinishBilling()
         {
 
-            XmlSerializer xs = new XmlSerializer(typeof(List<Item>));
+            //XmlSerializer xs = new XmlSerializer(typeof(List<Item>));
 
-            TextWriter txtWriter = new StreamWriter(@"C:\Users\PK185206\Desktop\sample1.xml");
+            //TextWriter txtWriter = new StreamWriter(@"C:\Users\jn185117\Desktop\sample1.xml");
 
-            xs.Serialize(txtWriter, ItemList);
+            //xs.Serialize(txtWriter, ItemList);
 
-            txtWriter.Close();
+            //txtWriter.Close();
+            HttpClient client = new HttpClient();
+            Uri baseAddress = new Uri("http://localhost:53297/");
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.PostAsJsonAsync("api/Items?TotalAmount=" + totalAmount, ItemList).Result;
+            string op = "";
+           
+            if (response.IsSuccessStatusCode)
+            {
+                using (HttpContent cont = response.Content)
+                {
+                    Task<string> res = cont.ReadAsStringAsync();
+                    op = res.Result;
+                                     }
+
+                ViewBag.data = totalAmount;
+                ViewBag.id = op;
+                
+                return View(ItemList);
+            }
+
+            else
+            {
+                itemAvailability = "Last transaction not saved";
+                return RedirectToAction("Index");
+            }
 
 
-            ViewBag.data = totalAmount;
-            return View(ItemList);
+           
+        }
+
+        public ActionResult NewTransaction()
+        {
+            ItemList.Clear();
+            itemAvailability = "";
+            totalAmount = 0;
+            return RedirectToAction("Index");
+
         }
 
     }

@@ -150,3 +150,5 @@ C:\Users\PK185206\Source\Repos\POSMVCWebApi3\POSMVCWebAPIClient\POSMVCWebAPIClie
 C:\Users\PK185206\Source\Repos\POSMVCWebApi3\POSMVCWebAPIClient\POSMVCWebAPIClient\obj\Debug\POSMVCWebAPIClient.csproj.CopyComplete
 C:\Users\PK185206\Source\Repos\POSMVCWebApi3\POSMVCWebAPIClient\POSMVCWebAPIClient\obj\Debug\POSMVCWebAPIClient.dll
 C:\Users\PK185206\Source\Repos\POSMVCWebApi3\POSMVCWebAPIClient\POSMVCWebAPIClient\obj\Debug\POSMVCWebAPIClient.pdb
+C:\Users\jn185117\source\repos\POSMVCWebAPIClient\POSMVCWebAPIClient\bin\System.Net.Http.Formatting.dll
+C:\Users\jn185117\source\repos\POSMVCWebAPIClient\POSMVCWebAPIClient\bin\System.Net.Http.Formatting.xml

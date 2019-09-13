@@ -186,6 +186,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Item.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Transaction.cs">
+      <DependentUpon>Transactions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transaction.Designer.cs">
+      <DependentUpon>Transaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionList.cs" />
+    <Compile Include="Models\Transactions.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transactions.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transactions.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transactions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transactions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transactions.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +228,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Item.edmx</DependentUpon>
       <LastGenOutput>Item1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Transactions.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Transactions.edmx</DependentUpon>
+      <LastGenOutput>Transactions.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Transactions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Transactions.edmx</DependentUpon>
+      <LastGenOutput>Transactions.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -235,13 +267,22 @@
     <Content Include="Item.edmx.diagram">
       <DependentUpon>Item.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\Transactions.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Transactions.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Transactions.edmx.diagram">
+      <DependentUpon>Transactions.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -258,7 +299,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

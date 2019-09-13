@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="POSTransactionModelStoreContainer" CdmEntityContainer="POSTransactionEntities">
+    <EntitySetMapping Name="TransactionLogs">
+      <EntityTypeMapping TypeName="POSTransactionModel.TransactionLog">
+        <MappingFragment StoreEntitySet="TransactionLog">
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="XMLData" ColumnName="XMLData" />
+          <ScalarProperty Name="LoadedDateTime" ColumnName="LoadedDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

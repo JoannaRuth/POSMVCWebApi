@@ -49,7 +49,8 @@
     
 </table>
 <h6>Bill Amount - @ViewBag.data</h6>
+<h6>Transaction ID - @ViewBag.id</h6>
 <p>
 
-    @Html.ActionLink("New Transaction", "Index", new { id = "from new transaction" })
+    @Html.ActionLink("New Transaction", "NewTransaction", new { id = "from new transaction" })
 </p>
