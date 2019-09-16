@@ -129,6 +129,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +177,8 @@
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Item\DisplayItemList.cshtml" />
     <Content Include="Views\Item\FinishBilling.cshtml" />
+    <Content Include="Views\Item\ViewTransaction.cshtml" />
+    <Content Include="Views\Item\DisplayTransaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,6 +19,8 @@ namespace POSMVCWebAPIClient.Controllers
         public static int i = 0;
         public static string itemAvailability = "";
         public static decimal totalAmount = 0;
+        public static TransactionXml obj = new TransactionXml();
+        public static List<Item> RetreivedItemList = new List<Item>();
 
         // GET: Item
         public ActionResult Index(string id)
@@ -47,7 +49,62 @@ namespace POSMVCWebAPIClient.Controllers
             return PartialView(ItemList);
         }
 
+        public ActionResult ViewTransaction()
+        {
+           
 
+            return PartialView();
+        }
+
+        public ActionResult DisplayTransaction(string TransactionId)
+        {
+            Transaction transaction;
+           
+            string apiURI = "http://localhost:53297/api/Transactions/" + TransactionId;
+            var client = new HttpClient();
+            var response = client.GetAsync(apiURI);
+
+            string op = "";
+
+            if (response.Result.IsSuccessStatusCode)
+            {
+                using (HttpContent cont = response.Result.Content)
+                {
+                    Task<string> res = cont.ReadAsStringAsync();
+                    op = res.Result;
+
+                    
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+
+                    transaction = js.Deserialize<Transaction>(op);
+
+                    XmlSerializer xs = new XmlSerializer(typeof(TransactionXml));
+                    TextReader txtrdr = new StringReader(transaction.TransactionList);
+
+
+
+                    obj = (TransactionXml)xs.Deserialize(txtrdr);
+                    RetreivedItemList = obj.Item.ToList();
+                    
+
+                }
+
+               
+             
+
+                return View(RetreivedItemList);
+
+            }
+
+            else
+            {
+                itemAvailability = "Transaction available";
+                return RedirectToAction("Index");
+
+            }
+
+
+        }
 
         public ActionResult Delete(string id)
         {
@@ -60,9 +117,9 @@ namespace POSMVCWebAPIClient.Controllers
                     itemFoundInList.Quantity--;
                     itemFoundInList.PriceMultiplied = (itemFoundInList.Price) * itemFoundInList.Quantity;
 
-                    //
+                    
                     totalAmount = totalAmount - itemFoundInList.Price;
-                    //
+                 
 
                 }
 
@@ -122,7 +179,7 @@ namespace POSMVCWebAPIClient.Controllers
 
                     }
 
-                    item.Index = i;
+                   
                     item.PriceMultiplied = item.Price;
 
                     ItemList.Add(item);
