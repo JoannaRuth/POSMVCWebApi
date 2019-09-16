@@ -138,7 +138,7 @@ namespace POSMVCWebAPI.Controllers
 
                
 
-                SqlConnection con = new SqlConnection(@"Data Source=WINJN185117-Y81\SQLEXPRESS;Initial Catalog=POS;Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Data Source=WINJN185117-Y81\SQLEXPRESS;Initial Catalog=POS;Integrated Security=False;User Id=POSUser1;Password=password@123;");
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 

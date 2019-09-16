@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POSModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Associate">
+    <Key>
+      <PropertyRef Name="AssociateId" />
+    </Key>
+    <Property Name="AssociateId" Type="Int32" Nullable="false" />
+    <Property Name="AssociatePwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Associate_Role" FromRole="Associate" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Associates" Relationship="Self.FK_Associate_Role" FromRole="Role" ToRole="Associate" />
+  </EntityType>
+  <Association Name="FK_Associate_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Associate" Type="Self.Associate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Associate">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POSEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Associates" EntityType="Self.Associate" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <AssociationSet Name="FK_Associate_Role" Association="Self.FK_Associate_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Associate" EntitySet="Associates" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -79,7 +79,6 @@ C:\Users\jn185117\source\repos\POSMVCWebAPI\POSMVCWebAPI\bin\System.Web.WebPages
 C:\Users\jn185117\source\repos\POSMVCWebAPI\POSMVCWebAPI\bin\System.Web.WebPages.Razor.xml
 C:\Users\jn185117\source\repos\POSMVCWebAPI\POSMVCWebAPI\bin\Antlr3.Runtime.pdb
 C:\Users\jn185117\source\repos\POSMVCWebAPI\POSMVCWebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\jn185117\source\repos\POSMVCWebAPI\POSMVCWebAPI\obj\Debug\POSMVCWebAPI.csprojAssemblyReference.cache
 C:\Users\jn185117\source\repos\POSMVCWebAPI\POSMVCWebAPI\obj\Debug\POSMVCWebAPI.csproj.CoreCompileInputs.cache
 C:\Users\jn185117\source\repos\POSMVCWebAPI\POSMVCWebAPI\obj\Debug\POSMVCWebAPI.csproj.CopyComplete
 C:\Users\jn185117\source\repos\POSMVCWebAPI\POSMVCWebAPI\obj\Debug\POSMVCWebAPI.dll

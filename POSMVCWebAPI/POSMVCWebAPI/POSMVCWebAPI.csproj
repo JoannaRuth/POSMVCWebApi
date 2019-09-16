@@ -16,7 +16,7 @@
     <AssemblyName>POSMVCWebAPI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -162,8 +162,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AssociatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -186,6 +188,22 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Item.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Associate.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Associate.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Associate.cs">
+      <DependentUpon>Associate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Associate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Associate.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>Associate.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transaction.cs">
       <DependentUpon>Transactions.tt</DependentUpon>
@@ -229,6 +247,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Item.edmx</DependentUpon>
       <LastGenOutput>Item1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Associate.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Associate.edmx</DependentUpon>
+      <LastGenOutput>Associate.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Associate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Associate.edmx</DependentUpon>
+      <LastGenOutput>Associate1.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Transactions.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -274,6 +302,13 @@
     </EntityDeploy>
     <Content Include="Models\Transactions.edmx.diagram">
       <DependentUpon>Transactions.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Associate.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Associate.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Associate.edmx.diagram">
+      <DependentUpon>Associate.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -351,7 +386,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53297</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53297/</IISUrl>
+          <IISUrl>http://localhost/POSMVCWebAPI</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
