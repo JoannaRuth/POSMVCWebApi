@@ -1,0 +1,28 @@
+﻿@model POSMVCWebAPIClient.Models.Associate
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div>
+
+
+    @using (Html.BeginForm("RemoveAssociate", "Manager"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AssociateId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AssociateId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AssociateId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Remove" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

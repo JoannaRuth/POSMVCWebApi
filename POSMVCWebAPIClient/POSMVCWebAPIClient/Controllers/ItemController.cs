@@ -19,18 +19,13 @@ namespace POSMVCWebAPIClient.Controllers
         public static int i = 0;
         public static string itemAvailability = "";
         public static decimal totalAmount = 0;
-        public static TransactionXml obj = new TransactionXml();
-        public static List<Item> RetreivedItemList = new List<Item>();
+       
 
         // GET: Item
         public ActionResult Index(string id)
-        {
-
-
+        {            
             ViewBag.message = itemAvailability;
             ViewBag.totalAmount = totalAmount;
-
-
             return View();
         }
 
@@ -49,62 +44,8 @@ namespace POSMVCWebAPIClient.Controllers
             return PartialView(ItemList);
         }
 
-        public ActionResult ViewTransaction()
-        {
-           
-
-            return PartialView();
-        }
-
-        public ActionResult DisplayTransaction(string TransactionId)
-        {
-            Transaction transaction;
-           
-            string apiURI = "http://localhost:53297/api/Transactions/" + TransactionId;
-            var client = new HttpClient();
-            var response = client.GetAsync(apiURI);
-
-            string op = "";
-
-            if (response.Result.IsSuccessStatusCode)
-            {
-                using (HttpContent cont = response.Result.Content)
-                {
-                    Task<string> res = cont.ReadAsStringAsync();
-                    op = res.Result;
-
-                    
-                    JavaScriptSerializer js = new JavaScriptSerializer();
-
-                    transaction = js.Deserialize<Transaction>(op);
-
-                    XmlSerializer xs = new XmlSerializer(typeof(TransactionXml));
-                    TextReader txtrdr = new StringReader(transaction.TransactionList);
-
-
-
-                    obj = (TransactionXml)xs.Deserialize(txtrdr);
-                    RetreivedItemList = obj.Item.ToList();
-                    
-
-                }
-
-               
-             
-
-                return View(RetreivedItemList);
-
-            }
-
-            else
-            {
-                itemAvailability = "Transaction available";
-                return RedirectToAction("Index");
-
-            }
-
-
-        }
+       
+       
 
         public ActionResult Delete(string id)
         {
@@ -157,7 +98,7 @@ namespace POSMVCWebAPIClient.Controllers
 
             else
             {
-                // string apiURI = "http://localhost:53297/api/Items/";
+                // string apiURI = "http://153.59.21.26/POSMVCWebAPI/api/Items/";
 
                 string apiURI = ConfigurationManager.AppSettings["apiGetUri"];
 
@@ -215,7 +156,7 @@ namespace POSMVCWebAPIClient.Controllers
 
             //txtWriter.Close();
             HttpClient client = new HttpClient();
-            Uri baseAddress = new Uri("http://localhost:53297/");
+            Uri baseAddress = new Uri("http://153.59.21.26/POSMVCWebAPI/");
             client.BaseAddress = baseAddress;
             HttpResponseMessage response = client.PostAsJsonAsync("api/Items?TotalAmount=" + totalAmount, ItemList).Result;
             string op = "";

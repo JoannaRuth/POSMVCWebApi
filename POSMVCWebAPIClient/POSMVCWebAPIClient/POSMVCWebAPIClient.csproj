@@ -123,11 +123,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AssociateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Associate.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TransactionXml.cs" />
@@ -177,8 +181,14 @@
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Item\DisplayItemList.cshtml" />
     <Content Include="Views\Item\FinishBilling.cshtml" />
-    <Content Include="Views\Item\ViewTransaction.cshtml" />
-    <Content Include="Views\Item\DisplayTransaction.cshtml" />
+    <Content Include="Views\Associate\DisplayTransaction.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Associate\Index.cshtml" />
+    <Content Include="Views\Associate\Transaction.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\AddAssociate.cshtml" />
+    <Content Include="Views\Manager\Delete.cshtml" />
+    <Content Include="Views\Manager\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

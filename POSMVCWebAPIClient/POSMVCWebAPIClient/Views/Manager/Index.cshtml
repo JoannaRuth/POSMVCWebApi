@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<html>
+@*<head>
+            <script type="text/javascript">
+                function preventBack() { window.history.forward(); }
+                setTimeout("preventBack()", 0);
+                window.onunload = function () { null };
+
+    </script>
+        </head>*@
+<body>
+    <div class="table-bordered">
+        <table>
+            <th>
+                <input type="button" value="Add Associate" onclick="location.href='@Url.Action("AddAssociate", "Manager")'" />
+            </th>
+            <th>
+                <input type="button" value="Remove Associate" onclick="location.href='@Url.Action("Delete", "Manager")'" />
+            </th>
+            <th>
+                <input type="button" value="Associate List" onclick="location.href='@Url.Action("List", "Manager")'" />
+            </th>
+            <th>
+                <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Login")'" />
+            </th>
+        </table>
+    </div>
+</body>
+</html>
