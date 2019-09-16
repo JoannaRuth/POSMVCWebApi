@@ -1,0 +1,45 @@
+﻿@model IEnumerable<POSMVCWebAPIClient.Models.Associate>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Associate Details</h2>
+
+@*<p>
+        @Html.ActionLink("Create New Associate", "AddAssociate")
+    </p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssociateId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssociatePwd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssociateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssociatePwd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleId)
+            </td>
+            @*<td>
+
+                    @Html.ActionLink("Remove", "Delete", new { id = item.AssociateId })
+                </td>*@
+        </tr>
+    }
+
+</table>

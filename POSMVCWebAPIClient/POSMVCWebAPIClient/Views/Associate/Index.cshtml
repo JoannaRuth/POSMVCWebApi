@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<head>
+            <script type="text/javascript">
+                function preventBack() { window.history.forward(); }
+                setTimeout("preventBack()", 0);
+                window.onunload = function () { null };
+
+    </script>
+        </head>*@
+<link href="~/Content/styles.css" rel="stylesheet" type="text/css" />
+
+<div class="jumbotron">
+    <table>
+        <tr>
+            <th>
+                <input class="btn btn-primary btn-lg" type="button" value="Sale" onclick="location.href='@Url.Action("Index", "Item")'" />
+            </th>
+        </tr>
+        <tr>
+            <input class="btn btn-primary btn-lg" type="button" value="Transactions" onclick="location.href='@Url.Action("Transaction", "Associate")'" />
+        </tr>
+        <tr>
+            <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Login")'" />
+        </tr>
+    </table>
+    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+
+</div>
+
